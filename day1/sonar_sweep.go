@@ -2,25 +2,15 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"strconv"
-	"strings"
+
+	"github.com/Ramkrao/advent/utils"
 )
 
 var input []int
 
 func init() {
-	fmt.Println("Start reading input file")
-
-	// read the file content
-	bytes, err := ioutil.ReadFile("day1/input.txt")
-	if err != nil {
-		fmt.Errorf("Failed to read input", err)
-	}
-	// convert to string
-	content := string(bytes)
-	// parse the content to an array
-	lines := strings.Split(content, "\n")
+	lines := utils.ReadArrayFromFile("day1/input.txt")
 	// initialize empty array
 	input = make([]int, len(lines))
 	// convert []string to []int
