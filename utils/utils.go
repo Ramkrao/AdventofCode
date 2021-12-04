@@ -3,6 +3,8 @@ package utils
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
+	"strconv"
 	"strings"
 )
 
@@ -23,4 +25,16 @@ func ReadArrayFromFile(filePath string) []string {
 	fmt.Printf("Read %d lines from the file \n", len(lines))
 
 	return lines
+}
+
+func StrArrToIntArr(arr []string) []int {
+	out := make([]int, len(arr))
+	for i, s := range arr {
+		val, err := strconv.Atoi(s)
+		if err != nil {
+			log.Fatal(err)
+		}
+		out[i] = val
+	}
+	return out
 }
