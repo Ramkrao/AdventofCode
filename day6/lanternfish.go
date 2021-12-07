@@ -16,7 +16,7 @@ func main() {
 
 	fishes := make([]int, 9)
 	for i := range input {
-		fishes[input[i]] = fishes[input[i]] + 1
+		fishes[input[i]] += 1
 	}
 
 	fmt.Println("Initial state: ", fishes)
@@ -25,24 +25,22 @@ func main() {
 
 		var total int
 		for i := range fishes {
-			total = total + fishes[i]
+			total += fishes[i]
 		}
 		fmt.Println("After ", days, fishes, total)
 	}
 }
 
 func spawn(fishes []int) []int {
-	temp := make([]int, len(fishes))
+	fishes_0 := fishes[0]
+	for i := range fishes {
+		if i == 8 {
+			fishes[i] = fishes_0
+		} else {
+			fishes[i] = fishes[i+1]
+		}
+	}
+	fishes[6] += fishes_0
 
-	temp[0] = fishes[1]
-	temp[1] = fishes[2]
-	temp[2] = fishes[3]
-	temp[3] = fishes[4]
-	temp[4] = fishes[5]
-	temp[5] = fishes[6]
-	temp[6] = fishes[7] + fishes[0]
-	temp[7] = fishes[8]
-	temp[8] = fishes[0]
-
-	return temp
+	return fishes
 }
