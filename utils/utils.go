@@ -38,3 +38,13 @@ func StrArrToIntArr(arr []string) []int {
 	}
 	return out
 }
+
+// Contains tells whether a contains x.
+func Contains(arr []int, i int) bool {
+	for _, n := range arr {
+		if i == n {
+			return true
+		}
+	}
+	return false
+}
