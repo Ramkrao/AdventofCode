@@ -48,3 +48,13 @@ func Contains(arr []int, i int) bool {
 	}
 	return false
 }
+
+// Contains tells whether a contains x.
+func ContainsStr(arr []string, s string) bool {
+	for _, n := range arr {
+		if s == n {
+			return true
+		}
+	}
+	return false
+}
