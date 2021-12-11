@@ -68,3 +68,42 @@ func ContainsByte(arr []byte, c byte) bool {
 	}
 	return false
 }
+
+func ComputeAdjacentPoints(arr [][]int, x int, y int) []string {
+	// construct up, down, left, right and diagonals
+	adj_points := make([]string, 0)
+	// up
+	if y > 0 {
+		adj_points = append(adj_points, strconv.Itoa(x)+":"+strconv.Itoa(y-1))
+	}
+	// down
+	if y < len(arr[0])-1 {
+		adj_points = append(adj_points, strconv.Itoa(x)+":"+strconv.Itoa(y+1))
+	}
+	// left
+	if x > 0 {
+		adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y))
+	}
+	// right
+	if x < len(arr)-1 {
+		adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y))
+	}
+	// up-left
+	if y > 0 && x > 0 {
+		adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y-1))
+	}
+	// up-right
+	if y > 0 && x < len(arr)-1 {
+		adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y-1))
+	}
+	// down-left
+	if y < len(arr[0])-1 && x > 0 {
+		adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y+1))
+	}
+	// down-right
+	if y < len(arr[0])-1 && x < len(arr)-1 {
+		adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y+1))
+	}
+	// fmt.Println("Computed ", adj_points)
+	return adj_points
+}
