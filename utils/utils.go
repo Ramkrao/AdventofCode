@@ -49,10 +49,20 @@ func Contains(arr []int, i int) bool {
 	return false
 }
 
-// Contains tells whether a contains x.
+// Contains tells whether arr contains s.
 func ContainsStr(arr []string, s string) bool {
 	for _, n := range arr {
 		if s == n {
+			return true
+		}
+	}
+	return false
+}
+
+// Contains tells whether arr contains c.
+func ContainsByte(arr []byte, c byte) bool {
+	for _, n := range arr {
+		if c == n {
 			return true
 		}
 	}
