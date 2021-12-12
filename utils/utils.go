@@ -6,6 +6,7 @@ import (
 	"log"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 func ReadArrayFromFile(filePath string) []string {
@@ -106,4 +107,24 @@ func ComputeAdjacentPoints(arr [][]int, x int, y int) []string {
 	}
 	// fmt.Println("Computed ", adj_points)
 	return adj_points
+}
+
+// checks if the entire string is lower case
+func IsLower(s string) bool {
+	for _, r := range s {
+		if !unicode.IsLower(r) && unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
+}
+
+func CountOccurance(arr []string, s string) int {
+	count := 0
+	for i := range arr {
+		if s == arr[i] {
+			count++
+		}
+	}
+	return count
 }
