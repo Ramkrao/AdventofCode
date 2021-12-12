@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // Reference - https://fodor.org/blog/go-graph/
 type Caves struct {
 	nodes []*CaveNode
@@ -44,32 +42,6 @@ func (c *Caves) AddEdge(n1, n2 string) {
 		}
 	}
 	node1.edges = append(node1.edges, node2)
-}
-
-// get a list of connected nodes
-func (c *Caves) Neighbours(id string) []*CaveNode {
-	neighbours := []*CaveNode{}
-	for _, n := range c.nodes {
-		for _, edge := range n.edges {
-			if n.id == id {
-				neighbours = append(neighbours, n)
-			}
-			if edge.id == id {
-				neighbours = append(neighbours, edge)
-			}
-		}
-	}
-	return neighbours
-}
-
-// list all the nodes and edges
-func (c *Caves) NodesNEdges() {
-	for _, node := range c.nodes {
-		fmt.Println("Node ", node.id)
-		for _, edge := range node.edges {
-			fmt.Println(node.id, " -> ", edge.id)
-		}
-	}
 }
 
 // get a specific node by id
