@@ -71,7 +71,7 @@ func flash(octopuses [][]int, x int, y int) [][]int {
 	// increment the total number of glow points
 	totalGlowPoints++
 	// get all adjacent points
-	adjPoints := utils.ComputeAdjacentPoints(octopuses, x, y)
+	adjPoints := utils.ComputeAdjacentPoints(octopuses, x, y, false)
 	// increase the step for all adjacent points
 	for _, point := range adjPoints {
 		pos := utils.StrArrToIntArr(strings.Split(point, ":"))

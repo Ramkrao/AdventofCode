@@ -70,7 +70,7 @@ func ContainsByte(arr []byte, c byte) bool {
 	return false
 }
 
-func ComputeAdjacentPoints(arr [][]int, x int, y int) []string {
+func ComputeAdjacentPoints(arr [][]int, x int, y int, ignoreDiagonal bool) []string {
 	// construct up, down, left, right and diagonals
 	adj_points := make([]string, 0)
 	// up
@@ -89,21 +89,23 @@ func ComputeAdjacentPoints(arr [][]int, x int, y int) []string {
 	if x < len(arr)-1 {
 		adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y))
 	}
-	// up-left
-	if y > 0 && x > 0 {
-		adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y-1))
-	}
-	// up-right
-	if y > 0 && x < len(arr)-1 {
-		adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y-1))
-	}
-	// down-left
-	if y < len(arr[0])-1 && x > 0 {
-		adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y+1))
-	}
-	// down-right
-	if y < len(arr[0])-1 && x < len(arr)-1 {
-		adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y+1))
+	if !ignoreDiagonal {
+		// up-left
+		if y > 0 && x > 0 {
+			adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y-1))
+		}
+		// up-right
+		if y > 0 && x < len(arr)-1 {
+			adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y-1))
+		}
+		// down-left
+		if y < len(arr[0])-1 && x > 0 {
+			adj_points = append(adj_points, strconv.Itoa(x-1)+":"+strconv.Itoa(y+1))
+		}
+		// down-right
+		if y < len(arr[0])-1 && x < len(arr)-1 {
+			adj_points = append(adj_points, strconv.Itoa(x+1)+":"+strconv.Itoa(y+1))
+		}
 	}
 	// fmt.Println("Computed ", adj_points)
 	return adj_points
@@ -127,4 +129,40 @@ func CountOccurance(arr []string, s string) int {
 		}
 	}
 	return count
+}
+
+func ReverseArray(arr []int) []int {
+	temp := make([]int, len(arr))
+	l := len(arr) - 1
+	for i := range arr {
+		temp[i] = arr[l]
+		l--
+	}
+	return temp
+}
+
+// util function to convert array co-ordinates to int edges
+func ParseString(row, col int) string {
+	if row == 0 {
+		return strconv.Itoa(col)
+	} else if row < 10 && col < 10 {
+		return strconv.Itoa(row) + "0" + strconv.Itoa(col)
+	} else if col < 10 {
+		return strconv.Itoa(row) + "0" + strconv.Itoa(col)
+	}
+	return strconv.Itoa(row) + strconv.Itoa(col)
+}
+
+// This could also return []bool
+// Reference: https://stackoverflow.com/a/43004689
+func AsBits(val uint64) []uint64 {
+	bits := []uint64{}
+	for i := 0; i < 24; i++ {
+		bits = append([]uint64{val & 0x1}, bits...)
+		// or
+		// bits = append(bits, val & 0x1)
+		// depending on the order you want
+		val = val >> 1
+	}
+	return bits
 }
