@@ -152,17 +152,3 @@ func ParseString(row, col int) string {
 	}
 	return strconv.Itoa(row) + strconv.Itoa(col)
 }
-
-// This could also return []bool
-// Reference: https://stackoverflow.com/a/43004689
-func AsBits(val uint64) []uint64 {
-	bits := []uint64{}
-	for i := 0; i < 24; i++ {
-		bits = append([]uint64{val & 0x1}, bits...)
-		// or
-		// bits = append(bits, val & 0x1)
-		// depending on the order you want
-		val = val >> 1
-	}
-	return bits
-}
