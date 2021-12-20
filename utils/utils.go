@@ -70,6 +70,16 @@ func ContainsByte(arr []byte, c byte) bool {
 	return false
 }
 
+// Contains tells whether [][]arr contains []arr.
+func ContainsArr(arr1 [][]int, arr2 []int) bool {
+	for _, n := range arr1 {
+		if n[0] == arr2[0] && n[1] == arr2[1] && n[2] == arr2[2] {
+			return true
+		}
+	}
+	return false
+}
+
 func ComputeAdjacentPoints(arr [][]int, x int, y int, ignoreDiagonal bool) []string {
 	// construct up, down, left, right and diagonals
 	adj_points := make([]string, 0)
@@ -139,16 +149,4 @@ func ReverseArray(arr []int) []int {
 		l--
 	}
 	return temp
-}
-
-// util function to convert array co-ordinates to int edges
-func ParseString(row, col int) string {
-	if row == 0 {
-		return strconv.Itoa(col)
-	} else if row < 10 && col < 10 {
-		return strconv.Itoa(row) + "0" + strconv.Itoa(col)
-	} else if col < 10 {
-		return strconv.Itoa(row) + "0" + strconv.Itoa(col)
-	}
-	return strconv.Itoa(row) + strconv.Itoa(col)
 }
