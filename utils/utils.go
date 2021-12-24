@@ -40,6 +40,15 @@ func StrArrToIntArr(arr []string) []int {
 	return out
 }
 
+func IntArrToStrArr(arr []int) []string {
+	out := make([]string, len(arr))
+	for i, val := range arr {
+		val := strconv.Itoa(val)
+		out[i] = val
+	}
+	return out
+}
+
 // Contains tells whether a contains x.
 func Contains(arr []int, i int) bool {
 	for _, n := range arr {
