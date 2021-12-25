@@ -12,15 +12,19 @@ import (
 var alpha = regexp.MustCompile(`[a-z]{1}`)
 
 var lines []string
+var totCount = 0
 
 func main() {
 	lines = utils.ReadArrayFromFile("day24/input.txt")
 
 	// part1
 	fmt.Println(identifyLowestNumber("99999999999999"))
+	fmt.Println("Totaal numbers evalutated ", totCount)
 
 	// part2
+	totCount = 0
 	fmt.Println(identifyLowestNumber("11111111111111"))
+	fmt.Println("Totaal numbers evalutated ", totCount)
 }
 
 func identifyLowestNumber(number string) (string, int) {
@@ -43,6 +47,7 @@ func identifyLowestNumber(number string) (string, int) {
 			}
 		}
 	}
+	fmt.Printf("Found the number %s with output %d\n", low_num, lowestz)
 	if lowestz != 0 {
 		low_num, lowestz = identifyLowestNumber(low_num)
 	}
@@ -85,5 +90,7 @@ func processInstr(input string) int {
 			}
 		}
 	}
+	// fmt.Printf("Processed input %s and the result is %d\n", input, vars["z"])
+	totCount++
 	return vars["z"]
 }
